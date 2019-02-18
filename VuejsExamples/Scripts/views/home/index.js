@@ -33,7 +33,7 @@ new Vue({
 
 new Vue({
     el: "#http-post-to-controller-with-list",
-    
+
     data: {
         antiforgeryToken: '',
         getListUrl: '',
@@ -41,7 +41,7 @@ new Vue({
     },
 
     created: function () {
-        console.log('http-post-to-controller-with-list is now created. Fetch list to controller'); 
+        console.log('http-post-to-controller-with-list is now created. Fetch list to controller');
     },
 
     beforeMount: function () {
@@ -78,4 +78,4 @@ new Vue({
         }
 
     }
-})
+});
