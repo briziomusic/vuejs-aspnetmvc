@@ -1,4 +1,5 @@
 ﻿@using VuejsExamples.ViewModel;
+@using VuejsExamples.Helpers;
 
 
 @model HomeViewModel
@@ -7,6 +8,36 @@
     ViewBag.Title = "Home Page";
 
 }
+
+<style>
+    #jumbotron-section4[v-cloak] {
+        display: none
+    }
+
+
+
+    #jumbotron-section5[v-cloak] > * {
+        display: none
+    }
+
+    #jumbotron-section5[v-cloak]::before {
+        content: "loading…"
+    }
+
+    #jumbotron-section6[v-cloak] > * {
+        display: none
+    }
+
+    #jumbotron-section6[v-cloak]::before {
+        content: " ";
+        display: block;
+        width: 16px;
+        height: 16px;
+        background-image: url('data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==');
+    }
+
+
+</style>
 
 @* This is a method to pass the vm directly to vue instance *@
 <div class="jumbotron" id="jumbotron-section" :initialJumbotronValues='setJumbotronValues(@Html.Raw(Json.Encode(Model)))'>
@@ -20,24 +51,126 @@
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
+    <div class="col-xs-12">
+        <h2>Set jumbotron values on button click</h2>
+    </div>
+</div>
+
+<div class="jumbotron" id="jumbotron-section2">
+    <button @@click='setJumbotronValues(@Html.Raw(Json.Encode(Model)))' v-if="title.length <= 0">Load values</button>
+    <h1>{{ title }}</h1>
+
+    <p class="lead">{{ description }}</p>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <h2>Vue.js tips - Hide moustaches before vue mounting</h2>
+        <button onclick="loadJumbotron3()">Load Jumbotron</button>
+        <script>
+            function loadJumbotron3() {
+                new Vue({
+                    el: '#jumbotron-section3',
+                    data: {
+                        title: 'Jumbotron title'
+                    }
+                })
+            }
+        </script>
+    </div>
+</div>
+
+<div class="jumbotron" id="jumbotron-section3">
+    <h1>{{ title }}</h1>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <h3>Vue.js tips - Hide moustaches before vue mounting - Solution with v-cloak</h3>
+        <p>Declare a [v-cloak] css class with display: none to hide the entire vue instance</p>
+        <button onclick="loadJumbotron4()">Load Jumbotron</button>
+        <script>
+            function loadJumbotron4() {
+                new Vue({
+                    el: '#jumbotron-section4',
+                    data: {
+                        title: 'Jumbotron title'
+                    }
+                })
+            }
+        </script>
+    </div>
+</div>
+
+<div class="jumbotron" id="jumbotron-section4" v-cloak>
+    <h1>{{ title }}</h1>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <p>Solution with v-cloak with loading text</p>
+        <button onclick="loadJumbotron5()">Load Jumbotron</button>
+        <script>
+            function loadJumbotron5() {
+                new Vue({
+                    el: '#jumbotron-section5',
+                    data: {
+                        title: 'Jumbotron title'
+                    }
+                })
+            }
+        </script>
+    </div>
+</div>
+
+<div class="jumbotron" id="jumbotron-section5" v-cloak>
+    <h1>{{ title }}</h1>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <p>Solution with v-cloak with loader</p>
+        <button onclick="loadJumbotron6()">Load Jumbotron</button>
+        <script>
+            function loadJumbotron6() {
+                new Vue({
+                    el: '#jumbotron-section6',
+                    data: {
+                        title: 'Jumbotron title'
+                    }
+                })
+            }
+        </script>
+    </div>
+</div>
+
+<div class="jumbotron" id="jumbotron-section6" v-cloak>
+    <h1>{{ title }}</h1>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <h2>Fetch list from the controller on page load</h2>
+    </div>
+</div>
+
+<div class="row" id="http-post-to-controller-with-list"
+
+    @*pass antiforgery token to vue instance*@
+    antiforgery-token="@Html.AntiForgeryTokenForAjaxPostInVue()"
+
+    @*pass url to the view instance*@
+    get-list-url="@Url.Action("GetList", "Home", new { area = "" })"
+    >
+
+    <div class="col-md-4" v-for="item in list">
+        <h2>{{ item.title }}</h2>
+        <p>{{ item.description }}</p>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            <a v-if="item.detailUrl" class="btn btn-default" :href="item.detailUrl">Go to details page</a>
         </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
 @Scripts.Render("~/bundles/views/home")
