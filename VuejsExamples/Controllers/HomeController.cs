@@ -84,9 +84,7 @@ namespace VuejsExamples.Controllers
         [HttpGet]
         public ActionResult ListSortingExample()
         {
-            dynamic result = null;
-
-            List<object> list = new List<object>();
+            var list = new List<object>();
 
             list.Add(new
             {
@@ -120,13 +118,6 @@ namespace VuejsExamples.Controllers
             {
                 title = "ARTICOLO SENZA PREZZO E SENZA ANNO",
             });
-
-            result = new
-            {
-                isSuccess = true,
-                data = list,
-                errorMessage = ""
-            };
 
             return View(list);
         }
