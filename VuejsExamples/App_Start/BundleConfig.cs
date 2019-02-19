@@ -42,6 +42,16 @@ namespace VuejsExamples
             bundles.Add(new ScriptBundle("~/bundles/views/home").Include(
                 "~/Scripts/views/home/index.js"
             ));
+
+            bundles.Add(new ScriptBundle("~/bundles/views/client-side-sorting").Include(
+                "~/Scripts/views/home/client-side-sorting.js"
+            ));
+
+#if DEBUG
+            BundleTable.EnableOptimizations = false;
+#else
+            BundleTable.EnableOptimizations = true;
+#endif
         }
     }
 }

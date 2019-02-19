@@ -80,6 +80,57 @@ namespace VuejsExamples.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [Route("client-side-sorting")]
+        [HttpGet]
+        public ActionResult ListSortingExample()
+        {
+            dynamic result = null;
+
+            List<object> list = new List<object>();
+
+            list.Add(new
+            {
+                title = "TRINCIA SEMOVENTE JAGUAR 900",
+                year = 2012,
+                price = 85000,
+            });
+
+            list.Add(new
+            {
+                title = "TRANCIA CLAAS JAGUAR 900 COMPLETA DI TESTATA RU600",
+                year = 2001,
+                price = 42000,
+            });
+
+            list.Add(new
+            {
+                title = "MINIESCAVATORE CX37C CAB",
+                year = 2017,
+                price = 29000,
+            });
+
+            list.Add(new
+            {
+                title = "MINIESCAVATORE KUBOTA U35-3M3 COMPLETO DI BENNA DA SCAVO DA 700 MM E ATTACCO RAPIDO",
+                year = 2017,
+                price = 31000,
+            });
+
+            list.Add(new
+            {
+                title = "ARTICOLO SENZA PREZZO E SENZA ANNO",
+            });
+
+            result = new
+            {
+                isSuccess = true,
+                data = list,
+                errorMessage = ""
+            };
+
+            return View(list);
+        }
+
         [HttpGet]
         public ActionResult About()
         {

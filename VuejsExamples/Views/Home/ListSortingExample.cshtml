@@ -1,0 +1,42 @@
+﻿@using VuejsExamples.ViewModel;
+@using VuejsExamples.Helpers;
+
+
+@model List<object>
+
+@{
+    ViewBag.Title = "Client Side sorting";
+
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h1>@ViewBag.Title</h1>
+    </div>
+</div>
+
+<div id="app" :initialValues='setList(@Html.Raw(Json.Encode(Model)))'>
+
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Ordina per: {{ orders[selectedOrderId].text }}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li v-for="order in orders" @@click.prevent="selectOrder(order.id)">
+                <a href="#">{{ order.text }}</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <ul>
+                <li v-for="element in sorted_items">{{ element.title }} - <b>price: {{ element.price }}</b> - <b>year: {{ element.year }}</b></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+@Scripts.Render("~/bundles/views/client-side-sorting")
