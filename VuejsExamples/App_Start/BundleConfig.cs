@@ -47,6 +47,10 @@ namespace VuejsExamples
                 "~/Scripts/views/home/client-side-sorting.js"
             ));
 
+            bundles.Add(new ScriptBundle("~/bundles/views/master-detail/index").Include(
+                "~/Scripts/views/master-detail/index.js"
+            ));
+
 #if DEBUG
             BundleTable.EnableOptimizations = false;
 #else

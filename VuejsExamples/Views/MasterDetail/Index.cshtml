@@ -1,0 +1,52 @@
+﻿@using VuejsExamples.Helpers;
+
+@{
+    ViewBag.Title = "Master Detail Example";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h1>@ViewBag.Title</h1>
+    </div>
+    <div id="master-detail"
+         @*pass antiforgery token to vue instance*@
+         antiforgery-token="@Html.AntiForgeryTokenForAjaxPostInVue()"
+         @*pass url to the view instance*@
+         fetch-regioni-url="@Url.Action("GetRegioni", "MasterDetail", new { area = "" })"
+         @*pass url to the view instance*@
+         fetch-province-url="@Url.Action("GetProvince", "MasterDetail", new { area = "" })">
+
+        <div class="row">
+            <div class="col-sm-4">
+                <label class="green">Selezionare la regione</label>
+
+                <select class="form-control" v-model="selectedRegione">
+                    <option v-for="regione in regioni" :value="regione.Key" :select="selectedRegione == regione.Key">{{ regione.Key }}</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table table-responsive table-striped">
+                    <thead>
+                        <tr>
+                            <th>Regione</th>
+                            <th>Provincia</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="provincia in province">
+                            <td class="text-left">{{ provincia.Key }}</td>
+                            <td class="text-left">{{ provincia.Value }}</td>
+                            <td><a :href="'/master-detail/details/' + provincia.Key + '/' + provincia.Value" class="btn btn-link">Dettaglio</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/views/master-detail/index")
